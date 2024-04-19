@@ -5,6 +5,7 @@ struct Vector2D {
     double x, y;
 };
 
+// overloading addition
 Vector2D operator+(const Vector2D& a, const Vector2D& b) {
     return Vector2D {
         a.x + b.x,
@@ -12,9 +13,10 @@ Vector2D operator+(const Vector2D& a, const Vector2D& b) {
     };
 }
 
+// overloading stream output
 std::ostream& operator<<(std::ostream& stream, const Vector2D& b) {
     return stream << '{' << b.x << ", " << b.y << "}\n";
-}
+} 
 
 int main() {
     Vector2D a {0.5, 1.0};
@@ -23,6 +25,4 @@ int main() {
     Vector2D c = a + b;
 
     std::cout << c << '\n';
-
-
 }
