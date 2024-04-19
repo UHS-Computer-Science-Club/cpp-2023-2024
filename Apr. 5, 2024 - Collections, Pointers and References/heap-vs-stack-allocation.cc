@@ -1,3 +1,5 @@
+// NOLINTBEGIN(cppcoreguidelines-owning-memory,*-magic-numbers)
+
 #include <iostream>
 
 int main() {
@@ -13,3 +15,5 @@ int main() {
 
   return 0;
 }
+
+// NOLINTEND(cppcoreguidelines-owning-memory,*-magic-numbers)
