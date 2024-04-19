@@ -9,16 +9,12 @@ public:
         std::cout << "Deleting MessagePrinter\n";
     }
 
-    MessagePrinter(const MessagePrinter& rhs) {
-        std::cout << "Copying MessagePrinter...\n";
-    }
-
-    MessagePrinter& operator=(const MessagePrinter& rhs) {
-        std::cout << "Assigning MessagePrinter...\n";
-    }
-
     void print_message() {
-        std::cout << "Printing a message...\n";
+        std::cout << "a message\n";
+    }
+
+    void print_message(int a) {
+        std::cout << "a message: " << a << '\n';
     }
 };
 
