@@ -13,5 +13,13 @@ int main() {
 
   std::cout << list[1] << "\n" << list[0] << "\n";
 
+  auto iterator = list.begin();
+
+  std::cout << *iterator << "\n";
+
+  ++iterator;
+
+  std::cout << *iterator << "\n";
+
   return 0;
 }

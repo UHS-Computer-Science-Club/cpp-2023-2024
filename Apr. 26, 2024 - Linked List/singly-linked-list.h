@@ -8,26 +8,68 @@ namespace containers {
 template <typename T>
 class SinglyLinkedList {
  public:
+  struct Node {
+    T payload;
+    Node *next = nullptr;
+  };
+
+  class Iterator {
+   public:
+    explicit Iterator(Node *node) : current_node_(node) {}
+
+    T &operator*() const noexcept;
+
+    Iterator &operator++() noexcept;
+
+   private:
+    Node *current_node_;
+  };
+
   ~SinglyLinkedList() noexcept;
 
   void push_back(const T &kPayload) noexcept;
 
   size_t size() const noexcept;
 
-  T &operator[](const size_t kIndex) noexcept;
+  Iterator begin() const noexcept;
+
+  Iterator end() const noexcept;
+
+  T &operator[](const size_t kIndex) const noexcept;
 
  private:
-  struct Node {
-    T payload;
-    Node *next = nullptr;
-  };
-
   Node *head_ = nullptr;
   size_t size_ = 0;
 };
 
 template <typename T>
-T &SinglyLinkedList<T>::operator[](const size_t kIndex) noexcept {
+typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::end()
+    const noexcept {
+  return Iterator(nullptr);
+}
+
+template <typename T>
+typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::begin()
+    const noexcept {
+  return Iterator(this->head_);
+}
+
+template <typename T>
+typename SinglyLinkedList<T>::Iterator &
+SinglyLinkedList<T>::Iterator::operator++() noexcept {
+  // Intentional nonexistent bound checking
+  this->current_node_ = this->current_node_->next;
+  return *this;
+}
+
+template <typename T>
+T &SinglyLinkedList<T>::Iterator::operator*() const noexcept {
+  // Intentional nonexistent nullptr checking
+  return this->current_node_->payload;
+}
+
+template <typename T>
+T &SinglyLinkedList<T>::operator[](const size_t kIndex) const noexcept {
   Node *current_node = this->head_;
 
   for (size_t current_index = 0; current_index < kIndex; ++current_index) {
